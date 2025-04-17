@@ -7,12 +7,3 @@ RUN apt-get update && \
 
 # Create a working directory
 WORKDIR /usr/src/app
-
-# Copy your assembly code into the container
-COPY . .
-
-# Assemble and link the code (example: assuming main.asm is in the directory)
-RUN nasm -f elf32 main.asm -o main.o && gcc -m32 main.o -o main
-
-# Define an entry point (you can change this according to your needs)
-ENTRYPOINT ["./main"]

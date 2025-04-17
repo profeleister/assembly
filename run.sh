@@ -25,6 +25,19 @@ fi
 FILE_TO_RUN="$1"
 FILE_NAME=$(basename "$FILE_TO_RUN" .asm)
 
+if [[ "$FILE_TO_RUN" != *.asm ]]; then
+    echo "Error: File must have .asm extension"
+
+    exit 1
+fi
+
+if [ ! -f "$FILE_TO_RUN" ]; then
+    echo "Error: File '$FILE_TO_RUN' not found."
+
+    exit 1
+fi
+
+
 # Check if the asm-compiler image exists
 if ! docker image inspect asm-compiler:latest >/dev/null 2>&1; then
     echo "Building asm-compiler image..."
